@@ -1,10 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=smdIfHpoArray
+#SBATCH --job-name=smdIfHpoArrayTPDS
 #SBATCH -t 0:30:00
-#SBATCH --array=1-200%3
+#SBATCH --array=1-300%3
 #SBATCH --gres=gpu:1
-#SBATCH -p gpu-a100
-#SBATCH --mem=16G
+#SBATCH --partition=deeplearn
+#SBATCH --qos=gpgpudeeplearn
+#SBATCH --mem=8G
 
 # Set the remote port and server
 REMOTEHOST=34.105.9.156
@@ -17,7 +18,7 @@ source ~/venvs/3.8.2/bin/activate
 
 # Each trial in the study will be run in a separate job.
 # The Optuna study_name has to be set to be able to continue an existing study.
-OPTUNA_STUDY_NAME=duneesha_smd_if_m12_run_1
+OPTUNA_STUDY_NAME=duneesha_smd_if_m12_tpds_run_2
 
 OPTUNA_DB=mysql://optuna:Optuna#1234@$REMOTEHOST:$REMOTEPORT/DuneeshaDB
 
